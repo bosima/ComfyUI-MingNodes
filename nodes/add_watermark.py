@@ -27,7 +27,7 @@ def add_image_watermark(original, watermark, x, y, opacity, scale):
 
 def add_text_watermark(original, text, x, y, scale, opacity, color, fonts):
     txt = Image.new('RGBA', original.size, (255, 255, 255, 0))
-    font_path = os.path.join(folder_paths.get_output_directory(), 'ComfyUI-MingNodes', 'fonts')
+    font_path = os.path.join(folder_paths.base_path, "custom_nodes", 'ComfyUI-MingNodes', 'fonts')
     font_path = font_path.replace("output", "custom_nodes")
     font_path = os.path.join(font_path, fonts)
     font_size = int(40 * scale)
@@ -49,8 +49,7 @@ def hex_to_rgb(hex_color):
 class AddWaterMarkNode:
     @classmethod
     def INPUT_TYPES(s):
-        font_path = os.path.join(folder_paths.get_output_directory(), 'ComfyUI-MingNodes', 'fonts')
-        font_path = font_path.replace("output", "custom_nodes")
+        font_path = os.path.join(folder_paths.base_path, "custom_nodes", 'ComfyUI-MingNodes', 'fonts')
         files = [f for f in os.listdir(font_path) if os.path.isfile(os.path.join(font_path, f))]
 
         return {
